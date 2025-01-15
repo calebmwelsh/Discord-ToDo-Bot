@@ -5,15 +5,18 @@ import os
 import discord
 from discord.ext import commands
 
-from utils import settings
+# Check for the environment variable for the Discord bot token
+DISCORD_TOKEN = os.getenv('DISCORD_BOT_TOKEN', None)
+
+if DISCORD_TOKEN is None:
+    # If the environment variable isn't set, fall back to the .toml configuration file
+    from utils import settings
+    DISCORD_TOKEN = settings.config["General"]["DiscordBotToken"]
 
 # Enable intents
-# intents = discord.Intents.default()
-# intents.messages = True
-# intents.message_content = True
-
-intents = discord.Intents.all()
-
+intents = discord.Intents.default()
+intents.messages = True
+intents.message_content = True
 
 # Bot initialization using mentions
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("<ToDoBot> "), description="A ToDo bot with persistent checklists.", intents=intents)
@@ -708,5 +711,5 @@ async def share_checklist(ctx):
         await ctx.send(embed=timeout_embed)
         
 # Run the bot 
-bot.run(settings.config["General"]["DiscordBotToken"])
+bot.run(DISCORD_TOKEN)
 
