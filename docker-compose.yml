@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   discord-bot:
-    build: .
+    image: kdidtech/discord-todo-bot:latest
     environment:
       - DISCORD_BOT_TOKEN=your-discord-bot-token-here
     restart: always
