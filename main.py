@@ -11,7 +11,19 @@ DISCORD_TOKEN = os.getenv('DISCORD_BOT_TOKEN', None)
 if DISCORD_TOKEN is None:
     # If the environment variable isn't set, fall back to the .toml configuration file
     from utils import settings
-    DISCORD_TOKEN = settings.config["General"]["DiscordBotToken"]
+    try:
+        DISCORD_TOKEN = settings.config["General"]["DiscordBotToken"]
+    # If the token is still not set, raise an error
+    except KeyError:
+        raise ValueError(
+            "Discord bot token not found. Please set the DISCORD_BOT_TOKEN environment variable "
+            "or ensure it is correctly defined in the .toml configuration file under [General]."
+        )
+    except AttributeError:
+        raise ValueError(
+            "Configuration file is not properly loaded. Please check your .toml file format."
+        )
+    
 
 # Enable intents
 intents = discord.Intents.default()
