@@ -14,8 +14,8 @@ if DISCORD_TOKEN is None:
     try:
         DISCORD_TOKEN = settings.config["General"]["DiscordBotToken"]
     # If the token is still not set, raise an error
-    except KeyError:
-        raise ValueError(
+    except TypeError:
+        raise TypeError(
             "Discord bot token not found. Please set the DISCORD_BOT_TOKEN environment variable "
             "or ensure it is correctly defined in the .toml configuration file under [General]."
         )
