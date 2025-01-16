@@ -24,6 +24,7 @@ if DISCORD_TOKEN is None:
             "Configuration file is not properly loaded. Please check your .toml file format."
         )
     
+print(DISCORD_TOKEN)
 
 # Enable intents
 intents = discord.Intents.default()
@@ -415,7 +416,7 @@ async def view_tasks(ctx):
     if user_id not in todo_checklists or not todo_checklists[user_id]:
         embed = discord.Embed(
             title="No Checklists Found 🛑",
-            description="You don't have any checklists. Please create one first using `@ToDoBot create <list_name>`.",
+            description="You don't have any checklists. Please create one first using `@ToDoBot create`.",
             color=discord.Color.red()
         )
         await ctx.send(embed=embed)
@@ -619,7 +620,7 @@ async def share_checklist(ctx):
     if user_id not in todo_checklists or not todo_checklists[user_id]:
         embed = discord.Embed(
             title="No Checklists Found 🛑",
-            description="You don't have any checklists. Please create one first using `@ToDoBot create <list_name>`.",
+            description="You don't have any checklists. Please create one first using `@ToDoBot create`.",
             color=discord.Color.red()
         )
         await ctx.send(embed=embed)
