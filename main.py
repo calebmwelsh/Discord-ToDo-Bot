@@ -34,8 +34,13 @@ intents.message_content = True
 # Bot initialization using mentions
 bot = commands.Bot(command_prefix=commands.when_mentioned_or("<ToDoBot> "), description="A ToDo bot with persistent checklists.", intents=intents)
 
-# File to store checklist data
-DATA_FILE = "data/checklists.json"
+# Directory and file to store checklist data
+DATA_DIR = "data"
+DATA_FILE = os.path.join(DATA_DIR, "checklists.json")
+
+# Ensure the data directory exists
+if not os.path.exists(DATA_DIR):
+    os.makedirs(DATA_DIR)
 
 # Load existing checklists from the file, or initialize an empty dictionary
 if os.path.exists(DATA_FILE):
