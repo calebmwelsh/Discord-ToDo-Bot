@@ -24,7 +24,6 @@ if DISCORD_TOKEN is None:
             "Configuration file is not properly loaded. Please check your .toml file format."
         )
     
-print(DISCORD_TOKEN)
 
 # Enable intents
 intents = discord.Intents.default()
