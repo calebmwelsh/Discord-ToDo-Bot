@@ -43,19 +43,36 @@ pip install -r requirements.txt
 python main.py
 
 
-### Running with Docker
+### Running with Docker Compose
 
-1. Build the Docker image:  
+1. Create a `docker-compose.yml` file with the following content:
 
-```bash
-docker build -t Discord-ToDoBot 
+```yaml
+version: '3.8'
+
+services:
+  discord-bot:
+    image: kdidtech/discord-todo-bot:latest
+    environment:
+      - DISCORD_BOT_TOKEN=your-discord-bot-token-here
+    restart: always
 ```
 
-2. Run the Docker container:  
+2. Replace `your-discord-bot-token-here` with your actual Discord bot token.
+
+3. Start the bot using Docker Compose:
 
 ```bash
-docker run -d --name Discord-ToDoBot
+docker-compose up -d
 ```
+
+4. Verify the bot is running:
+
+```bash
+docker-compose ps
+```
+
+This will automatically pull the latest image of the bot, set up the environment variables, and ensure the bot restarts automatically if it stops or the system reboots.
 
 ## Usage
 
